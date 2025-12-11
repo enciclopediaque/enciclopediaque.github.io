@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About — Enciclopediaque</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0e1a;
+            --bg-secondary: #0f1628;
+            --bg-card: #141c30;
+            --text-primary: #e8e4d9;
+            --text-secondary: #a8b4c4;
+            --text-muted: #6b7a8f;
+            --accent-gold: #d4a855;
+            --accent-teal: #4ecdc4;
+            --border: #1e2a45;
+        }
+        [data-theme="light"] {
+            --bg-primary: #f5f3ed;
+            --bg-secondary: #ffffff;
+            --bg-card: #faf9f6;
+            --text-primary: #1a1a2e;
+            --text-secondary: #4a4a5e;
+            --text-muted: #7a7a8e;
+            --border: #e0ddd5;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            padding: 40px 24px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border);
+        }
+        .back-link {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--accent-teal);
+            text-decoration: none;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .theme-toggle {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 8px 12px;
+            cursor: pointer;
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+        .about-content {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 32px;
+        }
+        .about-content h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: var(--text-primary);
+        }
+        .about-content h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin: 28px 0 16px;
+            color: var(--text-primary);
+        }
+        .about-content h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin: 24px 0 12px;
+            color: var(--text-primary);
+        }
+        .about-content p {
+            font-size: 1.25rem;
+            line-height: 1.8;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+        .about-content a {
+            color: var(--accent-teal);
+            text-decoration: none;
+        }
+        .about-content a:hover {
+            text-decoration: underline;
+        }
+        .about-content blockquote {
+            border-left: 3px solid var(--accent-gold);
+            padding-left: 16px;
+            margin: 20px 0;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+        .about-content ul, .about-content ol {
+            margin: 16px 0;
+            padding-left: 24px;
+            font-size: 1.25rem;
+        }
+        .about-content li {
+            margin-bottom: 8px;
+        }
+        .about-content img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin: 16px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="index.html" class="back-link">← Back to Feed</a>
+            <button class="theme-toggle" onclick="toggleTheme()">☀️</button>
+        </div>
+        <div class="about-content">
+            <h1>About</h1>
+
+<p>This site is a collection of thoughts, notes and articles. Thoughts and notes are human and AI is used to polish them and make the reading more attractive.
+
+ The MIT license applies on the content of this site, with the exception of the pictures hotlinked from Wikipedia.
+
+ Enjoy!
+
+</p>
+
+
+
+        </div>
+    </div>
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const current = html.getAttribute('data-theme');
+            const next = current === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+            document.querySelector('.theme-toggle').textContent = next === 'light' ? '🌙' : '☀️';
+        }
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        if (savedTheme === 'light') {
+            document.documentElement.setAttribute('data-theme', 'light');
+            document.querySelector('.theme-toggle').textContent = '🌙';
+        }
+    </script>
+</body>
+</html>
