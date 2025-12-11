@@ -619,6 +619,38 @@
         .post:nth-child(4) { animation-delay: 0.2s; }
         .post:nth-child(5) { animation-delay: 0.25s; }
         .post:nth-child(6) { animation-delay: 0.3s; }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--bg-card);
+            border: 1px solid var(--accent-gold);
+            color: var(--text-primary);
+            padding: 14px 24px;
+            border-radius: 8px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            z-index: 9999;
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        .toast-icon {
+            color: var(--accent-gold);
+            font-size: 1.1rem;
+        }
     </style>
 </head>
 <body class="archive-page">
@@ -637,7 +669,7 @@
                 </a>
                 <nav>
                     <a href="../index.html" class="active">Feed</a>
-                    <a href="#">Articles</a>
+                    <a href="../articles/index.html">Articles</a>
                     <a href="index.html">Archive</a>
                     <a href="#">About</a>
                 </nav>
@@ -12104,41 +12136,25 @@
             </div>
 
             <aside class="sidebar">
+                <!-- ARTICLES_SECTION_START -->
                 <div class="articles-section">
                     <div class="section-header" style="border: none; padding: 0; margin-bottom: 18px;">
                         <h2 class="section-title">Articles</h2>
-                        <a href="#" class="section-link">All →</a>
+                        <a href="../articles/index.html" class="section-link">All →</a>
                     </div>
                     <div class="articles-list">
-                        <a href="#" class="article-card">
-                            <span class="article-tag">Philosophy</span>
-                            <h3 class="article-title">The Stoic Algorithm: Ancient Wisdom for Digital Anxiety</h3>
-                            <p class="article-excerpt">How Marcus Aurelius's meditations offer a framework for navigating information overload...</p>
+                        <a href="../articles/x-the-social-network-and-its-dangers.html" class="article-card">
+                            <span class="article-tag">General</span>
+                            <h3 class="article-title">X, the social network and its dangers</h3>
+                            <p class="article-excerpt">Social networks enslave users in a relentless quest for attention, driven by egocentrism and algorithms that dictate content, creating a chaotic lands...</p>
                             <div class="article-meta">
-                                <span>12 min read</span>
-                                <span>Dec 4, 2025</span>
-                            </div>
-                        </a>
-                        <a href="#" class="article-card">
-                            <span class="article-tag">Mathematics</span>
-                            <h3 class="article-title">Infinity's Paradox: From Zeno to Cantor</h3>
-                            <p class="article-excerpt">A journey through humanity's struggle to comprehend the boundless...</p>
-                            <div class="article-meta">
-                                <span>18 min read</span>
-                                <span>Nov 28, 2025</span>
-                            </div>
-                        </a>
-                        <a href="#" class="article-card">
-                            <span class="article-tag">History</span>
-                            <h3 class="article-title">The House of Wisdom: Baghdad's Forgotten Renaissance</h3>
-                            <p class="article-excerpt">How Islamic scholars preserved and advanced Greek knowledge during Europe's Dark Ages...</p>
-                            <div class="article-meta">
-                                <span>15 min read</span>
-                                <span>Nov 21, 2025</span>
+                                <span>4 min read</span>
+                                <span>Dec 11, 2025</span>
                             </div>
                         </a>
                     </div>
                 </div>
+                <!-- ARTICLES_SECTION_END -->
 
                 <div class="topics-section">
                     <div class="section-header" style="border: none; padding: 0; margin-bottom: 14px;">
@@ -12169,6 +12185,12 @@
             </div>
         </div>
     </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+        <span class="toast-icon">✓</span>
+        <span class="toast-message">Link copied to clipboard</span>
+    </div>
 
     <script>
     (function() {
@@ -12240,6 +12262,18 @@
             });
         });
 
+        // === TOAST NOTIFICATION ===
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const messageEl = toast.querySelector('.toast-message');
+            if (message) messageEl.textContent = message;
+
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+
         // === SHARE LINK FUNCTIONALITY ===
         document.querySelectorAll('.post-share').forEach(link => {
             link.addEventListener('click', function(e) {
@@ -12251,20 +12285,21 @@
 
                 // Copy to clipboard
                 navigator.clipboard.writeText(url).then(() => {
-                    // Visual feedback
+                    // Visual feedback on icon
                     this.classList.add('copied');
-                    const originalTitle = this.getAttribute('title');
-                    this.setAttribute('title', 'Link copied!');
+
+                    // Show toast notification
+                    showToast('Link copied to clipboard');
 
                     // Update URL without scrolling
                     history.replaceState(null, null, '#' + postId);
 
                     setTimeout(() => {
                         this.classList.remove('copied');
-                        this.setAttribute('title', originalTitle);
                     }, 2000);
                 }).catch(err => {
                     console.error('Failed to copy:', err);
+                    showToast('Failed to copy link');
                 });
             });
         });
