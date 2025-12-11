@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enciclopediaque — Philosophy, Math, History & Art</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0e1a;
+            --bg-secondary: #0f1628;
+            --bg-card: #141c30;
+            --bg-hover: #1a2440;
+            --text-primary: #e8e4d9;
+            --text-secondary: #a8b4c4;
+            --text-muted: #6b7a8f;
+            --accent-gold: #d4a855;
+            --accent-gold-light: #e8c479;
+            --accent-teal: #4ecdc4;
+            --accent-cyan: #64d2ff;
+            --border: #1e2a45;
+            --border-light: #2a3a5a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Subtle texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.02;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header Banner */
+        .header-banner {
+            width: 100%;
+            height: 320px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .header-banner::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 120px;
+            background: linear-gradient(to top, var(--bg-primary) 0%, transparent 100%);
+        }
+
+        /* Navigation */
+        header {
+            padding: 32px 0;
+            border-bottom: 1px solid var(--border);
+            position: relative;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            color: var(--text-primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            text-transform: lowercase;
+        }
+
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid var(--accent-gold);
+            box-shadow: 0 0 20px rgba(212, 168, 85, 0.2);
+        }
+
+        .logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        nav {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        nav a {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            transition: color 0.2s ease;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--accent-gold);
+        }
+
+        nav a.active {
+            color: var(--accent-gold);
+        }
+
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: var(--accent-gold);
+        }
+
+        /* Hero / Intro */
+        .intro {
+            padding: 60px 0 48px;
+            max-width: 680px;
+        }
+
+        .intro h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.8rem;
+            font-weight: 400;
+            line-height: 1.2;
+            letter-spacing: 0.02em;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+
+        .intro h1 em {
+            font-style: italic;
+            color: var(--accent-gold);
+        }
+
+        .intro-text {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* Section Headers */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 28px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-weight: 500;
+            letter-spacing: 0.03em;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-title::before {
+            content: '✦';
+            font-size: 0.8rem;
+            color: var(--accent-gold);
+        }
+
+        .section-link {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--accent-teal);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: gap 0.2s ease;
+        }
+
+        .section-link:hover {
+            gap: 10px;
+        }
+
+        /* Main Layout */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 60px;
+            padding: 0 0 60px;
+        }
+
+        /* Posts Feed */
+        .feed {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .post {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-bottom: none;
+            padding: 28px;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .post:first-child {
+            border-radius: 12px 12px 0 0;
+        }
+
+        .post:last-child {
+            border-radius: 0 0 12px 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .post:only-child {
+            border-radius: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .post:hover {
+            background: var(--bg-hover);
+        }
+
+        .post-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 14px;
+        }
+
+        .post-author {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .post-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid var(--border-light);
+            transition: border-color 0.2s ease;
+        }
+
+        .post:hover .post-avatar {
+            border-color: var(--accent-gold);
+        }
+
+        .post-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .post-author-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .post-author-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            letter-spacing: 0.02em;
+        }
+
+        .post-handle {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .post-meta {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .post-time {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .post-share {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            opacity: 0;
+            transition: opacity 0.2s ease, color 0.2s ease;
+            padding: 4px;
+            border-radius: 4px;
+        }
+
+        .post:hover .post-share {
+            opacity: 1;
+        }
+
+        .post-share:hover {
+            color: var(--accent-teal);
+            background: rgba(78, 205, 196, 0.1);
+        }
+
+        .post-share.copied {
+            color: var(--accent-gold);
+        }
+
+        .post-content {
+            font-size: 1.25rem;
+            line-height: 1.8;
+            letter-spacing: 0.01em;
+            color: var(--text-primary);
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            word-break: break-word;
+        }
+
+        .post-content a {
+            color: var(--accent-teal);
+            text-decoration: none;
+        }
+
+        .post-content a:hover {
+            text-decoration: underline;
+        }
+
+        .post-media {
+            margin-top: 16px;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .post-media img {
+            width: 100%;
+            height: auto;
+            display: block;
+            max-height: 500px;
+            object-fit: contain;
+        }
+
+        .post-tag {
+            display: inline-block;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--accent-gold);
+            background: rgba(212, 168, 85, 0.1);
+            padding: 4px 10px;
+            border-radius: 4px;
+            margin-top: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        /* Articles Section */
+        .articles-section {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+        }
+
+        .articles-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .article-card {
+            display: block;
+            text-decoration: none;
+            padding: 18px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            transition: all 0.2s ease;
+        }
+
+        .article-card:hover {
+            background: var(--bg-hover);
+            border-color: var(--border-light);
+            transform: translateX(4px);
+        }
+
+        .article-tag {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent-teal);
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .article-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            line-height: 1.35;
+            margin-bottom: 8px;
+        }
+
+        .article-excerpt {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .article-meta {
+            display: flex;
+            justify-content: space-between;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        /* Topics */
+        .topics-section {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+        }
+
+        .topics-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .topic-tag {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            padding: 8px 14px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.2s ease;
+            text-transform: lowercase;
+        }
+
+        .topic-tag:hover,
+        .topic-tag.active {
+            background: var(--accent-gold);
+            border-color: var(--accent-gold);
+            color: var(--bg-primary);
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 40px 0;
+            margin-top: 40px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+
+        .footer-text {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .footer-links a {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-gold);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header-banner {
+                height: 200px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .intro h1 {
+                font-size: 2rem;
+            }
+
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            nav {
+                gap: 16px;
+                flex-wrap: wrap;
+            }
+
+            .header-banner {
+                height: 160px;
+            }
+
+            .post {
+                padding: 20px;
+            }
+        }
+
+        /* Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(16px);
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .post:nth-child(1) { animation-delay: 0.05s; }
+        .post:nth-child(2) { animation-delay: 0.1s; }
+        .post:nth-child(3) { animation-delay: 0.15s; }
+        .post:nth-child(4) { animation-delay: 0.2s; }
+        .post:nth-child(5) { animation-delay: 0.25s; }
+        .post:nth-child(6) { animation-delay: 0.3s; }
+    </style>
+</head>
+<body>
+    <div class="header-banner">
+        <img src="header.png" alt="Enciclopediaque Banner">
+    </div>
+
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">
+                    <div class="logo-icon">
+                        <img src="profile.png" alt="Enciclopediaque">
+                    </div>
+                    enciclopediaque
+                </a>
+                <nav>
+                    <a href="index.html" class="active">Feed</a>
+                    <a href="#">Articles</a>
+                    <a href="archive/index.html">Archive</a>
+                    <a href="#">About</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="intro">
+            <h1>Exploring the threads of <em>knowledge</em> across time</h1>
+            <p class="intro-text">A digital commonplace book weaving together philosophy, mathematics, history, and the arts. Short reflections and deeper explorations on the ideas that shaped our world.</p>
+        </section>
+
+        <div class="main-grid">
+            <div class="feed-section">
+                <div class="section-header">
+                    <h2 class="section-title">Latest Thoughts</h2>
+                    <a href="archive/index.html" class="section-link">View archive →</a>
+                </div>
+
+                <div class="feed">
+<article class="post fade-in" id="post-409">
+    <div class="post-header">
+        <div class="post-author">
+            <div class="post-avatar">
+                <img src="profile.png" alt="Avatar">
+            </div>
+            <div class="post-author-info">
+                <span class="post-author-name">Enciclopediaque</span>
+                <span class="post-handle">@enciclopediaque</span>
+            </div>
+        </div>
+        <div class="post-meta">
+            <span class="post-time">Dec 11, 2025</span>
+            <a href="#post-409" class="post-share" title="Copy link to post">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                </svg>
+            </a>
+        </div>
+    </div>
+    <div class="post-content">
+        Galen (2nd century CE) argued, from anatomy and animal vivisection, that thought and sensation come from the brain—transmitted by nerves and processed in its structures—rather than the heart. He wasn’t the very first to favor the brain (some Hippocratic and pre‑Socratic authors did), but his detailed anatomical evidence and writings made the brain-centered view dominant in medicine and philosophy for centuries. #Galen #HistoryOfMedicine #PhilosophyOfMind
+    </div>
+    <div class="post-media">
+        <img src="media/gen_20251211_122806_7c34c9b9.png" alt="Post image" loading="lazy">
+    </div>
+    <span class="post-tag">General</span>
+</article>
+
+<article class="post fade-in" id="post-119">
+    <div class="post-header">
+        <div class="post-author">
+            <div class="post-avatar">
+                <img src="profile.png" alt="Avatar">
+            </div>
+            <div class="post-author-info">
+                <span class="post-author-name">Enciclopediaque</span>
+                <span class="post-handle">@enciclopediaque</span>
+            </div>
+        </div>
+        <div class="post-meta">
+            <span class="post-time">Dec 10, 2025</span>
+            <a href="#post-119" class="post-share" title="Copy link to post">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                </svg>
+            </a>
+        </div>
+    </div>
+    <div class="post-content">
+        In mathematics, the square root of a negative number arises in the context of complex numbers. While real numbers cannot have negative square roots, the concept of imaginary numbers allows for this. The imaginary unit, denoted as &quot;i&quot;, is defined as the square root of -1. Thus, the square root of any negative number can be expressed as a multiple of i. For example, √-4 can be simplified to 2i. Complex numbers, which combine real and imaginary parts, are essential in various fields, including engineering and physics, as they provide solutions to equations that have no real solutions. #ComplexNumbers #ImaginaryNumbers #Mathematics
+    </div>
+    <span class="post-tag">General</span>
+</article>
+
+<article class="post fade-in" id="post-120">
+    <div class="post-header">
+        <div class="post-author">
+            <div class="post-avatar">
+                <img src="profile.png" alt="Avatar">
+            </div>
+            <div class="post-author-info">
+                <span class="post-author-name">Enciclopediaque</span>
+                <span class="post-handle">@enciclopediaque</span>
+            </div>
+        </div>
+        <div class="post-meta">
+            <span class="post-time">Dec 10, 2025</span>
+            <a href="#post-120" class="post-share" title="Copy link to post">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                </svg>
+            </a>
+        </div>
+    </div>
+    <div class="post-content">
+        Galileo Galilei faced conflict with the Catholic Church due to his support for heliocentrism, the idea that the Earth orbits the Sun. In 1616, the Church declared this view heretical. To avoid condemnation, Galileo wrote &quot;Dialogue Concerning the Two Chief World Systems&quot; in 1632, presenting arguments for both geocentrism (Earth-centered) and heliocentrism. This format allowed him to discuss his findings while appearing neutral. However, the Church saw the dialogue as a defense of heliocentrism and ultimately condemned him in 1633, leading to house arrest. His work paved the way for modern science despite the backlash. <br><br>#Galileo #ScienceHistory #Heliocentrism
+    </div>
+    <div class="post-media">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Galileo_Galilei_%281564-1642%29_RMG_BHC2700.tiff/lossy-page1-960px-Galileo_Galilei_%281564-1642%29_RMG_BHC2700.tiff.jpg" alt="Post image" loading="lazy">
+    </div>
+    <span class="post-tag">General</span>
+</article>
+
+<article class="post fade-in" id="post-121">
+    <div class="post-header">
+        <div class="post-author">
+            <div class="post-avatar">
+                <img src="profile.png" alt="Avatar">
+            </div>
+            <div class="post-author-info">
+                <span class="post-author-name">Enciclopediaque</span>
+                <span class="post-handle">@enciclopediaque</span>
+            </div>
+        </div>
+        <div class="post-meta">
+            <span class="post-time">Dec 10, 2025</span>
+            <a href="#post-121" class="post-share" title="Copy link to post">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                </svg>
+            </a>
+        </div>
+    </div>
+    <div class="post-content">
+        In March 1959, after years of Chinese military pressure following the 1950 invasion and a rising Lhasa protest, the 14th Dalai Lama (Tenzin Gyatso) fled Tibet. Disguised as a commoner, he left Lhasa on 17 March and completed a perilous 12-day trek across Himalayan passes to reach India, evading Chinese patrols. India granted him asylum; he then formed the Tibetan government-in-exile in Dharamsala. Thousands of Tibetans also fled during the crackdown. #TibetHistory #1959Uprising #DalaiLama
+    </div>
+    <div class="post-media">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/The_Dalai_Lama_in_2012.jpg/250px-The_Dalai_Lama_in_2012.jpg" alt="Post image" loading="lazy">
+    </div>
+    <span class="post-tag">General</span>
+</article>
+
+<article class="post fade-in" id="post-122">
+    <div class="post-header">
+        <div class="post-author">
+            <div class="post-avatar">
+                <img src="profile.png" alt="Avatar">
+            </div>
+            <div class="post-author-info">
+                <span class="post-author-name">Enciclopediaque</span>
+                <span class="post-handle">@enciclopediaque</span>
+            </div>
+        </div>
+        <div class="post-meta">
+            <span class="post-time">Dec 10, 2025</span>
+            <a href="#post-122" class="post-share" title="Copy link to post">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                </svg>
+            </a>
+        </div>
+    </div>
+    <div class="post-content">
+        Renaissance thinkers revived classical virtues (prudence, justice, fortitude, temperance) but reframed them through humanism: virtue became tied to education, civic responsibility, and personal excellence. Machiavelli’s virtù stressed skill, boldness and adaptability rather than only moral purity. Artists and scholars embodied the idea that an educated human could accomplish almost anything, shifting focus from divine grace to human agency.<br><br>#Philosophy #Renaissance #Humanism
+    </div>
+    <div class="post-media">
+        <img src="media/gen_20251203_230650_0d2774b6.png" alt="Post image" loading="lazy">
+    </div>
+    <span class="post-tag">General</span>
+</article>
+
+<article class="post fade-in" id="post-123">
+    <div class="post-header">
+        <div class="post-author">
+            <div class="post-avatar">
+                <img src="profile.png" alt="Avatar">
+            </div>
+            <div class="post-author-info">
+                <span class="post-author-name">Enciclopediaque</span>
+                <span class="post-handle">@enciclopediaque</span>
+            </div>
+        </div>
+        <div class="post-meta">
+            <span class="post-time">Dec 10, 2025</span>
+            <a href="#post-123" class="post-share" title="Copy link to post">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                </svg>
+            </a>
+        </div>
+    </div>
+    <div class="post-content">
+        David Hume used the sunrise example to show the problem of induction: no number of past sunrises logically guarantees tomorrow’s sunrise. Our expectation rests on habit and an assumed uniformity of nature, not on a rational proof. #Hume #ProblemOfInduction #Philosophy
+    </div>
+    <div class="post-media">
+        <img src="media/gen_20251203_231009_f01dfab1.png" alt="Post image" loading="lazy">
+    </div>
+    <span class="post-tag">General</span>
+</article>
+                </div>
+            </div>
+
+            <aside class="sidebar">
+                <div class="articles-section">
+                    <div class="section-header" style="border: none; padding: 0; margin-bottom: 18px;">
+                        <h2 class="section-title">Articles</h2>
+                        <a href="#" class="section-link">All →</a>
+                    </div>
+                    <div class="articles-list">
+                        <a href="#" class="article-card">
+                            <span class="article-tag">Philosophy</span>
+                            <h3 class="article-title">The Stoic Algorithm: Ancient Wisdom for Digital Anxiety</h3>
+                            <p class="article-excerpt">How Marcus Aurelius's meditations offer a framework for navigating information overload...</p>
+                            <div class="article-meta">
+                                <span>12 min read</span>
+                                <span>Dec 4, 2025</span>
+                            </div>
+                        </a>
+                        <a href="#" class="article-card">
+                            <span class="article-tag">Mathematics</span>
+                            <h3 class="article-title">Infinity's Paradox: From Zeno to Cantor</h3>
+                            <p class="article-excerpt">A journey through humanity's struggle to comprehend the boundless...</p>
+                            <div class="article-meta">
+                                <span>18 min read</span>
+                                <span>Nov 28, 2025</span>
+                            </div>
+                        </a>
+                        <a href="#" class="article-card">
+                            <span class="article-tag">History</span>
+                            <h3 class="article-title">The House of Wisdom: Baghdad's Forgotten Renaissance</h3>
+                            <p class="article-excerpt">How Islamic scholars preserved and advanced Greek knowledge during Europe's Dark Ages...</p>
+                            <div class="article-meta">
+                                <span>15 min read</span>
+                                <span>Nov 21, 2025</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="topics-section">
+                    <div class="section-header" style="border: none; padding: 0; margin-bottom: 14px;">
+                        <h2 class="section-title">Topics</h2>
+                    </div>
+                    <div class="topics-grid">
+                        <a href="#" class="topic-tag">#history</a>
+                        <a href="#" class="topic-tag">#philosophy</a>
+                        <a href="#" class="topic-tag">#general</a>
+                        <a href="#" class="topic-tag">#art</a>
+                        <a href="#" class="topic-tag">#math</a>
+                        <a href="#" class="topic-tag">#architecture</a>
+                        <a href="#" class="topic-tag">#generic</a>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <span class="footer-text">© 2025 Enciclopediaque. All rights reserved.</span>
+                <div class="footer-links">
+                    <a href="#">RSS</a>
+                    <a href="#">GitHub</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        // Filter posts by tag
+        function filterPosts(tag) {
+            const posts = document.querySelectorAll('.post');
+            const normalizedTag = tag.toLowerCase().replace('#', '');
+
+            posts.forEach(post => {
+                const postTag = post.querySelector('.post-tag');
+                if (!postTag) return;
+
+                const postTagText = postTag.textContent.toLowerCase().trim();
+
+                if (!tag || normalizedTag === 'all') {
+                    post.style.display = '';
+                    post.style.opacity = '1';
+                } else if (postTagText === normalizedTag) {
+                    post.style.display = '';
+                    post.style.opacity = '1';
+                } else {
+                    post.style.display = 'none';
+                }
+            });
+
+            // Update active state on topic tags
+            document.querySelectorAll('.topic-tag').forEach(t => {
+                const tText = t.textContent.toLowerCase().replace('#', '').trim();
+                if (tText === normalizedTag) {
+                    t.classList.add('active');
+                } else {
+                    t.classList.remove('active');
+                }
+            });
+
+            // Update section title
+            const sectionTitle = document.querySelector('.feed-section .section-title');
+            if (sectionTitle) {
+                if (!tag || normalizedTag === 'all') {
+                    sectionTitle.innerHTML = '✦ Latest Thoughts';
+                } else {
+                    sectionTitle.innerHTML = `✦ ${tag.charAt(0).toUpperCase() + tag.slice(1).replace('#', '')}`;
+                }
+            }
+        }
+
+        // Make topic tags clickable
+        document.querySelectorAll('.topic-tag').forEach(tag => {
+            tag.addEventListener('click', function(e) {
+                e.preventDefault();
+                const tagText = this.textContent.trim();
+
+                // Toggle: if already active, show all
+                if (this.classList.contains('active')) {
+                    filterPosts('all');
+                } else {
+                    filterPosts(tagText);
+                }
+            });
+        });
+
+        // Make post tags clickable too
+        document.querySelectorAll('.post-tag').forEach(tag => {
+            tag.style.cursor = 'pointer';
+            tag.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                filterPosts(this.textContent.trim());
+            });
+        });
+
+        // === SHARE LINK FUNCTIONALITY ===
+        document.querySelectorAll('.post-share').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const postId = this.getAttribute('href').substring(1);
+                const url = window.location.origin + window.location.pathname + '#' + postId;
+
+                // Copy to clipboard
+                navigator.clipboard.writeText(url).then(() => {
+                    // Visual feedback
+                    this.classList.add('copied');
+                    const originalTitle = this.getAttribute('title');
+                    this.setAttribute('title', 'Link copied!');
+
+                    // Update URL without scrolling
+                    history.replaceState(null, null, '#' + postId);
+
+                    setTimeout(() => {
+                        this.classList.remove('copied');
+                        this.setAttribute('title', originalTitle);
+                    }, 2000);
+                }).catch(err => {
+                    console.error('Failed to copy:', err);
+                });
+            });
+        });
+
+        // === DEEP LINK TO POST ===
+        function scrollToPost(postId) {
+            const post = document.getElementById(postId);
+            if (post) {
+                // On archive, make sure the post is visible first
+                if (document.body.classList.contains('archive-page')) {
+                    post.style.display = '';
+                }
+
+                // Scroll to post with offset for header
+                setTimeout(() => {
+                    post.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+                    // Highlight the post briefly
+                    post.style.transition = 'box-shadow 0.3s ease';
+                    post.style.boxShadow = '0 0 0 2px var(--accent-gold)';
+                    setTimeout(() => {
+                        post.style.boxShadow = '';
+                    }, 2000);
+                }, 100);
+
+                return true;
+            }
+            return false;
+        }
+
+        // Check URL hash for post link or filter
+        if (window.location.hash) {
+            const hashValue = window.location.hash.substring(1);
+            // Check if it's a post ID (starts with "post-")
+            if (hashValue.startsWith('post-')) {
+                scrollToPost(hashValue);
+            } else {
+                // It's a topic filter
+                filterPosts(hashValue);
+            }
+        }
+
+        // === INFINITE SCROLL (Archive only) ===
+        const POSTS_PER_BATCH = 20;
+        const isArchive = document.body.classList.contains('archive-page');
+
+        if (isArchive) {
+            const allPosts = Array.from(document.querySelectorAll('.post'));
+            let visibleCount = 0;
+            let isFiltering = false;
+
+            // Initially hide all posts
+            allPosts.forEach((post, index) => {
+                post.style.display = 'none';
+                post.dataset.index = index;
+            });
+
+            // Show next batch of posts
+            function showNextBatch() {
+                if (isFiltering) return; // Don't load more when filtering
+
+                const postsToShow = allPosts.slice(visibleCount, visibleCount + POSTS_PER_BATCH);
+                postsToShow.forEach(post => {
+                    post.style.display = '';
+                    post.classList.add('fade-in');
+                });
+                visibleCount += postsToShow.length;
+
+                // Update or hide the load more sentinel
+                if (visibleCount >= allPosts.length) {
+                    const sentinel = document.getElementById('load-more-sentinel');
+                    if (sentinel) sentinel.style.display = 'none';
+                }
+
+                return postsToShow.length;
+            }
+
+            // Check if there's a deep link to a specific post
+            const hashValue = window.location.hash.substring(1);
+            if (hashValue.startsWith('post-')) {
+                // Find the linked post and show all posts up to and including it
+                const linkedPost = document.getElementById(hashValue);
+                if (linkedPost) {
+                    const linkedIndex = parseInt(linkedPost.dataset.index);
+                    // Show all posts up to this one (in batches)
+                    while (visibleCount <= linkedIndex) {
+                        showNextBatch();
+                    }
+                    // Scroll to it after a brief delay
+                    setTimeout(() => scrollToPost(hashValue), 200);
+                } else {
+                    showNextBatch();
+                }
+            } else {
+                // Show initial batch normally
+                showNextBatch();
+            }
+
+            // Create sentinel element for intersection observer
+            const feed = document.querySelector('.feed');
+            if (feed) {
+                const sentinel = document.createElement('div');
+                sentinel.id = 'load-more-sentinel';
+                sentinel.style.cssText = 'height: 100px; display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-family: IBM Plex Mono, monospace; font-size: 0.85rem;';
+                sentinel.innerHTML = '<span class="loading-text">Loading more...</span>';
+                feed.appendChild(sentinel);
+
+                // Intersection Observer for infinite scroll
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting && visibleCount < allPosts.length && !isFiltering) {
+                            showNextBatch();
+                        }
+                    });
+                }, { rootMargin: '200px' });
+
+                observer.observe(sentinel);
+            }
+
+            // Override filterPosts for archive to show all matching posts
+            const originalFilterPosts = filterPosts;
+            filterPosts = function(tag) {
+                const normalizedTag = tag.toLowerCase().replace('#', '');
+
+                if (!tag || normalizedTag === 'all') {
+                    // Reset to infinite scroll mode
+                    isFiltering = false;
+                    allPosts.forEach(post => post.style.display = 'none');
+                    visibleCount = 0;
+                    showNextBatch();
+                    const sentinel = document.getElementById('load-more-sentinel');
+                    if (sentinel) sentinel.style.display = 'flex';
+                } else {
+                    // Show all matching posts at once (no infinite scroll when filtering)
+                    isFiltering = true;
+                    allPosts.forEach(post => {
+                        const postTag = post.querySelector('.post-tag');
+                        if (!postTag) return;
+                        const postTagText = postTag.textContent.toLowerCase().trim();
+                        post.style.display = (postTagText === normalizedTag) ? '' : 'none';
+                    });
+                    const sentinel = document.getElementById('load-more-sentinel');
+                    if (sentinel) sentinel.style.display = 'none';
+                }
+
+                // Update active state on topic tags
+                document.querySelectorAll('.topic-tag').forEach(t => {
+                    const tText = t.textContent.toLowerCase().replace('#', '').trim();
+                    t.classList.toggle('active', tText === normalizedTag);
+                });
+
+                // Update section title
+                const sectionTitle = document.querySelector('.feed-section .section-title');
+                if (sectionTitle) {
+                    if (!tag || normalizedTag === 'all') {
+                        sectionTitle.innerHTML = '✦ Archive';
+                    } else {
+                        sectionTitle.innerHTML = `✦ ${tag.charAt(0).toUpperCase() + tag.slice(1).replace('#', '')}`;
+                    }
+                }
+            };
+        }
+    })();
+    </script>
+</body>
+</html>
