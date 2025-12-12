@@ -4,6 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Articles — Enciclopediaque</title>
+    
+    <meta name="description" content="Long-form essays and articles from Enciclopediaque. A digital commonplace book with short reflections and essays on philosophy, mathematics, history, and the ar">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://enciclopediaque.com/articles/index.html">
+    <meta property="og:title" content="Articles — Enciclopediaque">
+    <meta property="og:description" content="Long-form essays and articles from Enciclopediaque. A digital commonplace book with short reflections and essays on philosophy, mathematics, history, and the ar">
+    <meta property="og:image" content="https://enciclopediaque.com/header.png">
+    <meta property="og:site_name" content="Enciclopediaque">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://enciclopediaque.com/articles/index.html">
+    <meta name="twitter:title" content="Articles — Enciclopediaque">
+    <meta name="twitter:description" content="Long-form essays and articles from Enciclopediaque. A digital commonplace book with short reflections and essays on philosophy, mathematics, history, and the ar">
+    <meta name="twitter:image" content="https://enciclopediaque.com/header.png">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -11,12 +29,24 @@
         :root {
             --bg-primary: #0a0e1a;
             --bg-secondary: #0f1628;
+            --bg-hover: #1a2440;
             --text-primary: #e8e4d9;
             --text-secondary: #a8b4c4;
             --text-muted: #6b7a8f;
             --accent-gold: #d4a855;
             --accent-teal: #4ecdc4;
             --border: #1e2a45;
+        }
+        [data-theme="light"] {
+            --bg-primary: #f8f6f1;
+            --bg-secondary: #ffffff;
+            --bg-hover: #eeebe4;
+            --text-primary: #2c2c3a;
+            --text-secondary: #5a5a6e;
+            --text-muted: #8a8a9e;
+            --accent-gold: #b8942e;
+            --accent-teal: #2a9d8f;
+            --border: #d4d0c8;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -27,13 +57,25 @@
             padding: 40px 24px;
         }
         .container { max-width: 900px; margin: 0 auto; }
-        a:hover { transform: translateX(4px); background: #1a2440 !important; }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; }
+        .theme-toggle {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 6px 10px;
+            cursor: pointer;
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+        .theme-toggle:hover { background: var(--bg-hover); }
+        a:hover { transform: translateX(4px); background: var(--bg-hover) !important; }
     </style>
 </head>
 <body>
     <div class="container">
-        <div style="margin-bottom: 32px;">
+        <div class="header">
             <a href="../index.html" style="font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem; color: var(--accent-teal); text-decoration: none;">← Back to Feed</a>
+            <button class="theme-toggle" onclick="toggleTheme()">☀️</button>
         </div>
         <h1 style="font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 500; margin-bottom: 32px; display: flex; align-items: center; gap: 12px;">
             <span style="color: var(--accent-gold);">✦</span> Articles
@@ -57,5 +99,21 @@
         
         </div>
     </div>
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const current = html.getAttribute('data-theme');
+            const next = current === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+            document.querySelector('.theme-toggle').textContent = next === 'light' ? '🌙' : '☀️';
+        }
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        if (savedTheme === 'light') {
+            document.documentElement.setAttribute('data-theme', 'light');
+            document.querySelector('.theme-toggle').textContent = '🌙';
+        }
+    </script>
 </body>
 </html>

@@ -3,7 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enciclopediaque — Philosophy, Math, History & Art</title>
+    <title>Enciclopediaque — Short essays on philosophy, math, history & art</title>
+    
+    <meta name="description" content="A digital commonplace book with short reflections and essays on philosophy, mathematics, history, and the arts.">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://enciclopediaque.com">
+    <meta property="og:title" content="Enciclopediaque — Philosophy, Math, History &amp; Art">
+    <meta property="og:description" content="A digital commonplace book with short reflections and essays on philosophy, mathematics, history, and the arts.">
+    <meta property="og:image" content="https://enciclopediaque.com/header.png">
+    <meta property="og:site_name" content="Enciclopediaque">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://enciclopediaque.com">
+    <meta name="twitter:title" content="Enciclopediaque — Philosophy, Math, History &amp; Art">
+    <meta name="twitter:description" content="A digital commonplace book with short reflections and essays on philosophy, mathematics, history, and the arts.">
+    <meta name="twitter:image" content="https://enciclopediaque.com/header.png">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -22,6 +40,22 @@
             --accent-cyan: #64d2ff;
             --border: #1e2a45;
             --border-light: #2a3a5a;
+        }
+
+        [data-theme="light"] {
+            --bg-primary: #f8f6f1;
+            --bg-secondary: #ffffff;
+            --bg-card: #f5f3ed;
+            --bg-hover: #eeebe4;
+            --text-primary: #2c2c3a;
+            --text-secondary: #5a5a6e;
+            --text-muted: #8a8a9e;
+            --accent-gold: #b8942e;
+            --accent-gold-light: #d4a855;
+            --accent-teal: #2a9d8f;
+            --accent-cyan: #1a8a9d;
+            --border: #d4d0c8;
+            --border-light: #e0ddd5;
         }
 
         * {
@@ -169,6 +203,23 @@
             width: 100%;
             height: 1px;
             background: var(--accent-gold);
+        }
+
+        .theme-toggle {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 6px 10px;
+            cursor: pointer;
+            color: var(--text-primary);
+            font-size: 1rem;
+            margin-left: 16px;
+            transition: all 0.2s ease;
+        }
+
+        .theme-toggle:hover {
+            background: var(--bg-hover);
+            border-color: var(--border-light);
         }
 
         /* Hero / Intro */
@@ -673,6 +724,7 @@
                     <a href="archive/index.html">Archive</a>
                     <a href="about.html">About</a>
                 </nav>
+                <button class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">☀️</button>
             </div>
         </div>
     </header>
@@ -691,6 +743,36 @@
                 </div>
 
                 <div class="feed">
+<article class="post fade-in" id="post-417">
+    <div class="post-header">
+        <div class="post-author">
+            <div class="post-avatar">
+                <img src="profile.png" alt="Avatar">
+            </div>
+            <div class="post-author-info">
+                <span class="post-author-name">Enciclopediaque</span>
+                <span class="post-handle">@enciclopediaque</span>
+            </div>
+        </div>
+        <div class="post-meta">
+            <span class="post-time">Dec 12, 2025</span>
+            <a href="#post-417" class="post-share" title="Copy link to post">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                </svg>
+            </a>
+        </div>
+    </div>
+    <div class="post-content">
+        Hannah Arendt: genuine political freedom is not simply private autonomy but the capacity to appear, speak, and act together in a public realm. By speaking and taking collective action people disclose distinct identities, build shared meanings and institutions, and thereby create the common world in which freedom is possible. #HannahArendt #PoliticalPhilosophy #Freedom
+    </div>
+    <div class="post-media">
+        <img src="media/gen_20251211_223605_78a0b57f.jpg" alt="Post image" loading="lazy">
+    </div>
+    <span class="post-tag">General</span>
+</article>
+
 <article class="post fade-in" id="post-416">
     <div class="post-header">
         <div class="post-author">
@@ -834,36 +916,6 @@
     </div>
     <span class="post-tag">Architecture</span>
 </article>
-
-<article class="post fade-in" id="post-411">
-    <div class="post-header">
-        <div class="post-author">
-            <div class="post-avatar">
-                <img src="profile.png" alt="Avatar">
-            </div>
-            <div class="post-author-info">
-                <span class="post-author-name">Enciclopediaque</span>
-                <span class="post-handle">@enciclopediaque</span>
-            </div>
-        </div>
-        <div class="post-meta">
-            <span class="post-time">Dec 11, 2025</span>
-            <a href="#post-411" class="post-share" title="Copy link to post">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
-                    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
-                </svg>
-            </a>
-        </div>
-    </div>
-    <div class="post-content">
-        How did sailors find longitude? The 18th-century “longitude problem” baffled mariners until self-taught English clockmaker John Harrison built sea-worthy chronometers—especially his compact H4—that kept precise time at sea. The Longitude Act (1714) and Board of Longitude spurred innovation; lunar-distance methods competed. Harrison&#x27;s breakthrough transformed navigation, global trade, and modern timekeeping. <a href="https://en.wikipedia.org/wiki/Longitude" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Longitude</a> #Longitude #JohnHarrison #Navigation <a href="https://en.wikipedia.org/wiki/Longitude" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Longitude</a>
-    </div>
-    <div class="post-media">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Harrison_H4_clockwork_1.jpg/330px-Harrison_H4_clockwork_1.jpg" alt="Post image" loading="lazy">
-    </div>
-    <span class="post-tag">History</span>
-</article>
                 </div>
             </div>
 
@@ -910,10 +962,6 @@
         <div class="container">
             <div class="footer-content">
                 <span class="footer-text">© 2025 Enciclopediaque. All rights reserved.</span>
-                <div class="footer-links">
-                    <a href="#">RSS</a>
-                    <a href="#">GitHub</a>
-                </div>
             </div>
         </div>
     </footer>
@@ -1193,6 +1241,26 @@
                     }
                 }
             };
+        }
+    })();
+
+    // Theme toggle functionality
+    function toggleTheme() {
+        const html = document.documentElement;
+        const current = html.getAttribute('data-theme');
+        const next = current === 'light' ? 'dark' : 'light';
+        html.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+        document.querySelector('.theme-toggle').textContent = next === 'light' ? '🌙' : '☀️';
+    }
+
+    // Load saved theme on page load
+    (function() {
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        if (savedTheme === 'light') {
+            document.documentElement.setAttribute('data-theme', 'light');
+            const toggle = document.querySelector('.theme-toggle');
+            if (toggle) toggle.textContent = '🌙';
         }
     })();
     </script>
