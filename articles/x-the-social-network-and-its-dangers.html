@@ -119,9 +119,32 @@
             border-radius: 8px;
             margin: 16px 0;
         }
+        .page-header {
+            max-width: 800px;
+            margin: 0 auto 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .theme-toggle {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 6px 10px;
+            cursor: pointer;
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+        .theme-toggle:hover {
+            background: var(--bg-card);
+        }
     </style>
 </head>
 <body>
+    <div class="page-header">
+        <a href="../index.html" style="font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem; color: var(--accent-teal); text-decoration: none;">← Back to Feed</a>
+        <button class="theme-toggle" onclick="toggleTheme()">☀️</button>
+    </div>
     <article class="post article-page" style="max-width: 800px; margin: 0 auto;">
     
             <div class="article-cover" style="margin: -28px -28px 24px -28px; border-radius: 12px 12px 0 0; overflow: hidden;">
@@ -142,5 +165,21 @@
         <a href="../index.html" style="font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem; color: var(--accent-teal); text-decoration: none;">← Back to Feed</a>
     </div>
 </article>
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const current = html.getAttribute('data-theme');
+            const next = current === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+            document.querySelector('.theme-toggle').textContent = next === 'light' ? '🌙' : '☀️';
+        }
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        if (savedTheme === 'light') {
+            document.documentElement.setAttribute('data-theme', 'light');
+            document.querySelector('.theme-toggle').textContent = '🌙';
+        }
+    </script>
 </body>
 </html>
